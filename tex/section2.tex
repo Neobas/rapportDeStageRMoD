@@ -1,0 +1,70 @@
+% section 2 : activités
+\section{Activités du stage}
+\subsection{Analyse}
+Cette section aborde les informations récoltées pour définir les problèmes à résoudre et les corrections à apporter.
+\subsubsection{Les tests sur le système}
+Pour connaître les problèmes liés au déploiement de Pharo dans un environnement en lecture seule, j'ai élaboré une liste de tests que j'ai effectués en conditions "normales", c'est-à-dire dans un répertoire où l'écriture est possible, et dans un répertoire en lecture seule. Je passerai en revue ces tests ci-dessous, en spécifiant le comportement observé dans chacun des cas, et les classerai en 3 catégories :
+\begin{description}
+	\item[Fonctionnement normal :] La fonctionnalité a le comportement attendu, il n'y a rien à corriger.
+	\item[Fonctionnement altéré :] La fonctionnalité a un comportement inattendu, mais ne renvoie pas forcément d'erreur.
+	\item[Fonctionnement impossible :] La fonctionnalité est inutilisable en l'état, et renvoie systématiquement une erreur.
+\end{description}
+
+\paragraph{Le système de log :}
+Le log est un mécanisme permettant aux développeurs d'identifier des problèmes lors de l'exécution d'un programme en écrivant la trace de celle-ci dans un fichier. Pour tester ce système, j'ai exécuté la commande suivante :
+\begin{verbatim}
+Smalltalk logDuring: [ :stream |
+                        stream nextPutAll: 'Hello log'; cr ]
+\end{verbatim}
+Cette commande envoie le message \verb$logDuring:$ à la classe \verb$Smalltalk$, ce qui a pour effet d'exécuter le bloc placé en paramètre en lui donnant accès à un stream vers le fichier de log. Ici, le bloc est le suivant :
+
+\begin{verbatim}
+[ :stream | stream nextPutAll: 'Hello log'; cr]
+\end{verbatim}
+
+Ce dernier prend un paramètre nommé \verb$stream$ et lui envoie le message \verb$nextPutAll:$ , ce qui écrit dans le stream la chaîne de caractères \verb$'Hello log'$. Puis le message \verb$cr$ est envoyé en cascade pour effectuer un retour chariot. Le résultat attendu est l'apparition du message "Hello log" dans le fichier de log.
+
+Dans des conditions "classiques", le message est correctement écrit dans le fichier.
+
+Dans le cas du système Read-Only, il ne se passe rien : aucune erreur n'apparaît, ce qui est un bon point, cependant, en examinant le fichier de log on observe que le message n'est pas écrit. J'ai donc classé ce problème dans la catégorie "Fonctionnement altéré".
+
+\paragraph{Lancement des tests (Test Runner) :}
+Pharo, c'est 6499 classes, 86479 méthodes et 13395 tests, ce qui représente beaucoup de travail si on souhaite lancer tous les tests du système. C'est là que le Test Runner trouve tout son intérêt : Ce programme inclus dans Pharo permet de voir et de lancer tous les tests existants avec un interface clair et simple d'utilisation. Son fonctionnement est très intuitif : on sélectionne le ou les paquets à tester dans la colonne de gauche, puis les classes de test dans la colonne de droite. Enfin, on clique sur le bouton correspondant à ce qui nous intéresse, lancement des tests ou couverture du code. On peut ensuite consulter le résultat dans la partie droite de la fenêtre qui indique l'issue des tests lancés avec un code couleur:
+\begin{description}
+	\item[le fond est vert :] les tests ont tous passé, il n'y a pas de problème.
+	\item[le fond est jaune :] il y a des erreurs non-bloquantes, il est conseillé de les corriger.
+	\item[le fond est rouge :] il y a des erreurs bloquantes, comme une exception lancée par exemple, il faut corriger au plus vite.
+\end{description}
+
+Pour vérifier le fonctionnement du Test Runner, je l'ai ouvert pour lancer tous les tests. Le résultat est bon : il fonctionne aussi bien dans des conditions "normales" qu'en Read-Only, seul le nombre de tests réussis change :
+\begin{itemize}
+	\item en conditions "normales" : sur  tests lancés,  passent,  sont iqnorés,  déclenchent une erreur prévue,  échouent et  erreurs ont étés levées.
+	\item en conditions "Read-Only" : sur  tests lancés,  passent,  sont iqnorés,  déclenchent une erreur prévue,  échouent et  erreurs ont étés levées.
+\end{itemize}
+
+\paragraph{Écriture de code (Nautilus) :}
+Pour écrire du code dans Pharo, on utilise Nautilus, le navigateur du système. Il donne accès aux paquets, classes et méthodes, et permet la modification ainsi que la création de ces derniers. Bien que Nautilus soit amené à être remplacé par Calypso dans Pharo 7, je l'ai tout de même testé pour être complet.
+
+Mon test consistait en la création d'un paquet, d'une classe, d'une méthode, et la modification de la classe et de la méthode.
+
+\paragraph{La sauvegarde (Monticello) :}
+
+\paragraph{Le playground :}
+
+\subsubsection{Enquête auprès de la communauté}
+Avant de commencer à corriger les problèmes identifiés, j'ai fait une enquête auprès de la communauté de Pharo pour avoir leur avis sur le comportement que Pharo devrait adopter au terme des réparations. Pour chaque question, plusieurs réponses étaient proposées, tout en laissant aux sondés la possibilité de donner une réponse différente si les propositions ne leurs convenaient pas. Ci-dessous sont listées les questions avec la répartition des réponses et une analyse de celles-ci.
+
+
+\subsubsection{Problématique}
+
+\subsection{Conception d'une solution de logging}
+\subsubsection{Architecture}
+
+\subsubsection{Fonctionnalités}
+
+\subsubsection{Résolution du problème}
+
+\subsection{Intégration au système}
+\subsubsection{Modifications apportées}
+
+\subsubsection{Respect de la rétrocompatibilité}
