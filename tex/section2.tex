@@ -60,9 +60,6 @@ Le test consistait à enregistrer une modification et à charger un paquet dans 
 Le playground est comme son nom l'indique un bac à sable où on exécute du code librement. Servant d'invite de commande, c'est l'un des points d'entrée du système, permettant de lancer un programme, d'imprimer le résultat d'une évaluation et d'analyser la composition d'un objet (un des avantages du système "vivant"), entre autres. Il dispose de plus d'un système d'historique permettant de récupérer le contenu d'une session précédente qui a été fermée par mégarde par exemple.
 Mon test visait à tester ce système d'historique en écrivant quelque chose dans le playground avant de le fermer et de tenter dans un autre de récupérer le code écrit. Si cela ne pose aucun problème en conditions "normales", la moindre modification entrée dans le playground (ajout d'un caractère par exemple) déclenchera une erreur non-bloquante, ce qui entrave vraiment l'utilisation du playground, étant obligé d'entrer un caractère et de fermer l'erreur en boucle. De plus, l'historique est indisponible, ce qui place donc le playground dans la catégorie "Fonctionnement impossible".
 
-\paragraph{Naviguer dans le système :}
-
-
 \subsubsection{Enquête auprès de la communauté}
 Avant de commencer à corriger les problèmes identifiés, j'ai fait une enquête (en anglais) auprès de la communauté de Pharo, intitulée "How Pharo should act in a read-only environment ?" (Comment Pharo devrait se comporter dans un environnement en lecture seule ?), pour avoir leur avis sur le comportement que Pharo devrait adopter au terme des réparations. Pour chaque question, plusieurs réponses étaient proposées, tout en laissant aux sondés la possibilité de donner une réponse différente si les propositions ne leurs convenaient pas. Ci-dessous sont listées les questions avec la répartition des réponses et une analyse de celles-ci.
 
@@ -109,6 +106,15 @@ L'idée générale est que les tests devraient pouvoir être lancés, mais qu'il
 
 \subparagraph{Analyse :}
 La majorité des sondés désire pouvoir coder sans problème, tandis qu'une partie un peu plus petite est prête à abandonner la sauvegarde pour pouvoir écrire du code, supposant que lancer Pharo en lecture seule implique de ne pouvoir qu'exécuter du code.
+
+\paragraph{Devrait-il être possible de sauvegarder les changements dans Monticello ?}
+\subparagraph{Réponses balisées :}
+\begin{itemize}
+	\item 40\% des sondés souhaitent que Monticello abandonne son cache de paquet posant problème pour pouvoir l'utiliser .
+	\item 24\% des sondés ne souhaitent pas pouvoir sauvegarder avec Monticello si le système est en lecture seule.
+	\item 12\% des sondés ne se prononcent pas.
+	\item 8\% des sondés souhaitent que Monticello écrive son cache dans une zone inscriptible pour qu'il puisse fonctionner normalement.
+\end{itemize}
 %\subsubsection{Problématique}
 
 %\subsection{Conception d'une solution de logging}
