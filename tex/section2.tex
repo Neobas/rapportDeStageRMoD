@@ -42,29 +42,33 @@ Pour vérifier le fonctionnement du Test Runner, je l'ai ouvert pour lancer tous
 	\item en conditions "Read-Only" : sur  tests lancés,  passent,  sont iqnorés,  déclenchent une erreur prévue,  échouent et  erreurs ont étés levées.
 \end{itemize}
 
+Le résultat des tests indique que plusieurs systèmes sont défaillants, mais le Test Runner fonctionne sans problème, je l'ai donc classé dans "Fonctionnement normal".
+
 \paragraph{Écriture de code (Nautilus) :}
 Pour écrire du code dans Pharo, on utilise Nautilus, le navigateur du système. Il donne accès aux paquets, classes et méthodes, et permet la modification ainsi que la création de ces derniers. Bien que Nautilus soit amené à être remplacé par Calypso dans Pharo 7, je l'ai tout de même testé pour être complet.
 
-Mon test consistait en la création d'un paquet, d'une classe, d'une méthode, et la modification de la classe et de la méthode.
+Mon test consistait en la création d'une classe et d'une méthode, et la modification de ces dernières. En conditions "normales", il n'y a aucun problème. En read-only, la création de la classe comme de la méthode provoque l'apparition d'erreurs, mais la création se fait tout de même. La modification d'une méthode fonctionne, mais celle d'une classe freeze l'image.
 
-\paragraph{La sauvegarde (Monticello) :}
+Il est possible de coder, mais avec des erreurs, je l'ai donc classé dans "Fonctionnement altéré".
 
-\paragraph{Le playground :}
+%\paragraph{La sauvegarde (Monticello) :}
+
+%\paragraph{Le playground :}
 
 \subsubsection{Enquête auprès de la communauté}
 Avant de commencer à corriger les problèmes identifiés, j'ai fait une enquête auprès de la communauté de Pharo pour avoir leur avis sur le comportement que Pharo devrait adopter au terme des réparations. Pour chaque question, plusieurs réponses étaient proposées, tout en laissant aux sondés la possibilité de donner une réponse différente si les propositions ne leurs convenaient pas. Ci-dessous sont listées les questions avec la répartition des réponses et une analyse de celles-ci.
 
 
-\subsubsection{Problématique}
+%\subsubsection{Problématique}
 
-\subsection{Conception d'une solution de logging}
-\subsubsection{Architecture}
+%\subsection{Conception d'une solution de logging}
+%\subsubsection{Architecture}
 
-\subsubsection{Fonctionnalités}
+%\subsubsection{Fonctionnalités}
 
-\subsubsection{Résolution du problème}
+%\subsubsection{Résolution du problème}
 
-\subsection{Intégration au système}
-\subsubsection{Modifications apportées}
+%\subsection{Intégration au système}
+%\subsubsection{Modifications apportées}
 
-\subsubsection{Respect de la rétrocompatibilité}
+%\subsubsection{Respect de la rétrocompatibilité}
