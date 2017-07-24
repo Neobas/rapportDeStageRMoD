@@ -51,7 +51,10 @@ Mon test consistait en la création d'une classe et d'une méthode, et la modifi
 
 Il est possible de coder, mais avec des erreurs, je l'ai donc classé dans "Fonctionnement altéré".
 
-%\paragraph{La sauvegarde (Monticello) :}
+\paragraph{La sauvegarde (Monticello) :}
+Monticello est un système de contrôle de version (VCS) comme git, c'est-à-dire qu'il permet de sauvegarder les modifications apportées à un moment donné sous forme de commits, permettant ainsi de pouvoir revenir dans le passé via ces derniers. En plus de permettre une sauvegarde en local, Monticello propose de sauvegarder les modifications dans un repository en ligne, via un service comme Smalltalkhub. Monticello est amené à être remplacé dans Pharo 7 par Calypso, un VCS plus centré sur git avec une gestion par repository plutôt que par paquet pour Monticello.
+
+Le test consistait à enregistrer une modification et à charger un paquet dans Monticello. Si en conditions normales la manipulation ne pose aucun problème, il est impossible de sauvegarder en read-only, que ce soit en local ou en ligne. La seule option possible est d'enregistrer dans les fichiers temporaires, ce qui ne permet donc pas de faire une vraie sauvegarde. De plus, tenter un commit renvoit une erreur. Pour le chargement, le résultat est plus radical, car ce dernier provoque un freeze de l'image. J'ai donc classé Monticello dans la catégorie "Fonctionnement impossible".
 
 %\paragraph{Le playground :}
 
