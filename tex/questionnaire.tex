@@ -1,0 +1,83 @@
+\subsubsection{Enquête auprès de la communauté}
+Avant de commencer à corriger les problèmes identifiés, j'ai fait une enquête (en anglais) auprès de la communauté de Pharo, intitulée "How Pharo should act in a read-only environment ?" (Comment Pharo devrait se comporter dans un environnement en lecture seule ?), pour avoir leur avis sur le comportement que Pharo devrait adopter au terme des réparations. Pour chaque question, plusieurs réponses étaient proposées, tout en laissant aux sondés la possibilité de donner une réponse différente si les propositions ne leurs convenaient pas. Ci-dessous sont listées les questions avec la répartition des réponses et une analyse de celles-ci.
+
+\paragraph{Est-ce que les tests qui écrivent dans un fichier devraient être lancés ?}
+\subparagraph{Réponses balisées :}
+\begin{itemize}
+	\item 24\% des sondés se moquent de savoir si les tests sont lancés ou non, car ces derniers n'ont pas été écrit dans le but d'être lancé en lecture seule.
+	\item 20\% des sondés souhaitent que les tests soient lancés, mais que ces derniers doivent échouer si le système est en lecture seule.
+	\item 12\% des sondés souhaitent que les tests soient lancés et réussissent que ce soit en conditions "normales" ou en lecture seule.
+	\item 8\% des sondés ne souhaitent pas que les tests puissent être lancés en lecture seule.
+	\item 8\% des sondés ne se prononcent pas.
+\end{itemize}
+
+\subparagraph{Réponses libres :}
+\begin{itemize}
+	\item Certains tests peuvent être modifiés pour fonctionner dans un environnement en lecture seule, mais pas tous. Une solution pourrait être de diviser les tests en 2 catégories : les "vrais" tests unitaires et les tests "pas vraiment" unitaires.
+	\item Ces tests devraient être lancés en mémoire ou être ignorés.
+	\item Un mock devrait être généré automatiquement.
+	\item Pourquoi tester dans un environnement en lecture seule ? Les tests suggèrent du débug, donc de l'écriture de code, donc de l'écriture tout court.
+	\item Si un système est fait pour être lancé en lecture seule, il devrait être possible de marquer (avec un pragma par exemple) les tests qui ne devraient pas être lancés et ceux qui devraient l'être (pour permettre de tester le mode read-only).
+	\item Il faudrait ajouter une extension pour les tests écrivant dans un fichier et la désactiver quand le système est en lecture seule.
+	\item J'aimerai que tous les tests réussissent, mais attendre des tests qu'ils échouent semble plus raisonnable.
+\end{itemize}
+
+\subparagraph{Analyse :}
+L'idée générale est que les tests devraient pouvoir être lancés, mais qu'ils devraient soit échouer, soit être ignorés. En soit la première option est déjà implémentée, car les tests échouent inévitablement si l'écriture échoue. La catégorisation est une idée intéressante, mais qui demande un travail plus approfondi pour trouver un système qui soit simple d'utilisation tout en assurant que le système ne sera pas trop impacté.
+
+\paragraph{Devrait-il être possible de créer des classes et/ou des méthodes ?}
+\subparagraph{Réponses balisées :}
+\begin{itemize}
+	\item 60\% des sondés souhaitent être capable d'écrire du code sans être confronté à une erreur.
+	\item 16\% des sondés considèrent que le système ne devrait pas accepter de changements si il est en lecture seule.
+	\item 8\% des sondés souhaite pouvoir écrire du code, quitte à ce que le système lève des exceptions.
+	\item 4\% des sondés ne se prononcent pas.
+\end{itemize}
+
+\subparagraph{Réponses libres :}
+\begin{itemize}
+	\item Il devrait être possible de customiser le système avec un script lancé au démarrage pouvant ajouter des classes, etc. Il n'est pas nécessaire de sauvegarder quoi que ce soit.
+	\item Plutôt non (car le système est en lecture seule), ou d'une façon non persistante.
+	\item Oui, mais uniquement dans la mémoire.
+	\item Nous devrions pouvoir le faire, mais sans sauvegarder.
+\end{itemize}
+
+\subparagraph{Analyse :}
+La majorité des sondés désire pouvoir coder sans problème, tandis qu'une partie un peu plus petite est prête à abandonner la sauvegarde pour pouvoir écrire du code, supposant que lancer Pharo en lecture seule implique de ne pouvoir qu'exécuter du code.
+
+\paragraph{Devrait-il être possible de sauvegarder les changements dans Monticello ?}
+\subparagraph{Réponses balisées :}
+\begin{itemize}
+	\item 40\% des sondés souhaitent que Monticello ignore son package-cache posant problème pour pouvoir le faire fonctionner .
+	\item 24\% des sondés ne souhaitent pas pouvoir sauvegarder avec Monticello si le système est en lecture seule.
+	\item 12\% des sondés ne se prononcent pas.
+	\item 8\% des sondés souhaitent que Monticello écrive son cache dans une zone inscriptible pour qu'il puisse fonctionner normalement.
+\end{itemize}
+
+\subparagraph{Réponses libres :}
+\begin{itemize}
+	\item Monticello pourrait écrire dans /tmp, par exemple
+	\item Tout dépends si le package-cache est inscriptible ou non.
+	\item Un système read-only devrait le rester.
+	\item Il faudrait pouvoir sauvegarder les paquets sur un serveur distant en utilisant git.
+\end{itemize}
+
+\subparagraph{Analyse :}
+La majorité des sondés souhaitent que Monticello soit fonctionnel, mais ne sont pas tous d'accord sur les modifications à apporter au package-cache, qui est à l'origine de la défaillance. Certains suggèrent que le cache soit purement et simplement ignoré, d'autres que le cache en question soit écrit dans une zone inscriptible.
+
+\paragraph{Devrait-il être possible d'utiliser l'inspecteur ?}
+\subparagraph{Réponses balisées :}
+\begin{itemize}
+	\item 80\% des sondés pensent que oui, car l'inspecteur est une pièce importante de l'IDE.
+	\item 8\% des sondés n'ont pas de préférence à ce sujet, car selon eux une application en lecture seule est déjà déployée.
+	\item 4\% des sondés ne souhaite pas pouvoir utiliser l'inspecteur en lecture seule.
+	\item 4\% des sondés ne se prononcent pas.
+\end{itemize}
+
+\subparagraph{Réponses libres :}
+\begin{itemize}
+	\item Les inspecteurs peuvent faire partie de l'application, qu'elle soit en lecture seule ou non.
+\end{itemize}
+
+\subparagraph{Analyse :}
+Les résultats pour cette question sont très clair : l'inspecteur doit pouvoir fonctionner en lecture seule de part sa grande utilité dans le développement.
