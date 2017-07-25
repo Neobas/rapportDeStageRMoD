@@ -110,11 +110,22 @@ La majorité des sondés désire pouvoir coder sans problème, tandis qu'une par
 \paragraph{Devrait-il être possible de sauvegarder les changements dans Monticello ?}
 \subparagraph{Réponses balisées :}
 \begin{itemize}
-	\item 40\% des sondés souhaitent que Monticello abandonne son cache de paquet posant problème pour pouvoir l'utiliser .
+	\item 40\% des sondés souhaitent que Monticello ignore son package-cache posant problème pour pouvoir le faire fonctionner .
 	\item 24\% des sondés ne souhaitent pas pouvoir sauvegarder avec Monticello si le système est en lecture seule.
 	\item 12\% des sondés ne se prononcent pas.
 	\item 8\% des sondés souhaitent que Monticello écrive son cache dans une zone inscriptible pour qu'il puisse fonctionner normalement.
 \end{itemize}
+
+\subparagraph{Réponses libres :}
+\begin{itemize}
+	\item Monticello pourrait écrire dans /tmp, par exemple
+	\item Tout dépends si le package-cache est inscriptible ou non.
+	\item Un système read-only devrait le rester.
+	\item Il faudrait pouvoir sauvegarder les paquets sur un serveur distant en utilisant git.
+\end{itemize}
+
+\subparagraph{Analyse :}
+La majorité des sondés souhaitent que Monticello soit fonctionnel, mais ne sont pas tous d'accord sur les modifications à apporter au package-cache, qui est à l'origine de la défaillance. Certains suggèrent que le cache soit purement et simplement ignoré, d'autres que le cache en question soit écrit dans une zone inscriptible.
 %\subsubsection{Problématique}
 
 %\subsection{Conception d'une solution de logging}
