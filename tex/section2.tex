@@ -30,11 +30,17 @@ Dans le cas du système Read-Only, il ne se passe rien : aucune erreur n'appara�
 
 \paragraph{Lancement des tests (Test Runner) :}
 Pharo, c'est 6499 classes, 86479 méthodes et 13395 tests, ce qui représente beaucoup de travail si on souhaite lancer tous les tests du système. C'est là que le Test Runner trouve tout son intérêt : Ce programme inclus dans Pharo permet de voir et de lancer tous les tests existants avec un interface clair et simple d'utilisation. Son fonctionnement est très intuitif : on sélectionne le ou les paquets à tester dans la colonne de gauche, puis les classes de test dans la colonne de droite. Enfin, on clique sur le bouton correspondant à ce qui nous intéresse, lancement des tests ou couverture du code. On peut ensuite consulter le résultat dans la partie droite de la fenêtre qui indique l'issue des tests lancés avec un code couleur:
+
 \begin{description}
 	\item[le fond est vert :] les tests ont tous passé, il n'y a pas de problème.
 	\item[le fond est jaune :] il y a des erreurs non-bloquantes, il est conseillé de les corriger.
 	\item[le fond est rouge :] il y a des erreurs bloquantes, comme une exception lancée par exemple, il faut corriger au plus vite.
 \end{description}
+
+\begin{figure}[h]
+	\includegraphics[width=\linewidth]{./img/testrunner.png}
+	\caption[testrunner]{Le Test Runner}
+\end{figure}
 
 Pour vérifier le fonctionnement du Test Runner, je l'ai ouvert pour lancer tous les tests. Le résultat est bon : il fonctionne aussi bien dans des conditions "normales" qu'en Read-Only, seul le nombre de tests réussis change :
 \begin{itemize}
@@ -47,6 +53,11 @@ Le résultat des tests indique que plusieurs systèmes sont défaillants, mais l
 \paragraph{Écriture de code (Nautilus) :}
 Pour écrire du code dans Pharo, on utilise Nautilus, le navigateur du système. Il donne accès aux paquets, classes et méthodes, et permet la modification ainsi que la création de ces derniers. Bien que Nautilus soit amené à être remplacé par Calypso dans Pharo 7, je l'ai tout de même testé pour être complet.
 
+\begin{figure}[h]
+	\includegraphics[width=\linewidth]{./img/nautilus.png}
+	\caption[nautilus]{Nautilus, le navigateur de Pharo}
+\end{figure}
+
 Mon test consistait en la création d'une classe et d'une méthode, et la modification de ces dernières. En conditions "normales", il n'y a aucun problème. En read-only, la création de la classe comme de la méthode provoque l'apparition d'erreurs, mais la création se fait tout de même. La modification d'une méthode fonctionne, mais celle d'une classe freeze l'image.
 
 Il est possible de coder, mais avec des erreurs, je l'ai donc classé dans "Fonctionnement altéré".
@@ -54,16 +65,36 @@ Il est possible de coder, mais avec des erreurs, je l'ai donc classé dans "Fonc
 \paragraph{La sauvegarde (Monticello) :}
 Monticello est un système de contrôle de version (VCS) comme git, c'est-à-dire qu'il permet de sauvegarder les modifications apportées à un moment donné sous forme de commits, permettant ainsi de pouvoir revenir dans le passé via ces derniers. En plus de permettre une sauvegarde en local, Monticello propose de sauvegarder les modifications dans un repository en ligne, via un service comme Smalltalkhub. Monticello est amené à être remplacé dans Pharo 7 par Calypso, un VCS plus centré sur git avec une gestion par repository plutôt que par paquet pour Monticello.
 
+\begin{figure}[h]
+	\includegraphics[width=\linewidth]{./img/monticello.png}
+	\caption[monticello]{Monticello}
+\end{figure}
+
 Le test consistait à enregistrer une modification et à charger un paquet dans Monticello. Si en conditions "normales" la manipulation ne pose aucun problème, il est impossible de sauvegarder en read-only, que ce soit en local ou en ligne. La seule option possible est d'enregistrer dans les fichiers temporaires, ce qui ne permet donc pas de faire une vraie sauvegarde. De plus, tenter un commit renvoit une erreur. Pour le chargement, le résultat est plus radical, car ce dernier provoque un freeze de l'image. J'ai donc classé Monticello dans la catégorie "Fonctionnement impossible".
 
 \paragraph{Le playground :}
-Le playground est comme son nom l'indique un bac à sable où on exécute du code librement. Servant d'invite de commande, c'est l'un des points d'entrée du système, permettant de lancer un programme, d'imprimer le résultat d'une évaluation et d'analyser la composition d'un objet (un des avantages du système "vivant"), entre autres. Il dispose de plus d'un système d'historique permettant de récupérer le contenu d'une session précédente qui a été fermée par mégarde par exemple.
+Le playground est comme son nom l'indique un bac à sable où l'on exécute du code librement. Servant d'invite de commande, c'est l'un des points d'entrée du système, permettant de lancer un programme, d'imprimer le résultat d'une évaluation et d'analyser la composition d'un objet (un des avantages du système "vivant"), entre autres. Il dispose de plus d'un système d'historique permettant de récupérer le contenu d'une session précédente qui a été fermée par mégarde par exemple.
+
+
+
 Mon test visait à tester ce système d'historique en écrivant quelque chose dans le playground avant de le fermer et de tenter dans un autre de récupérer le code écrit. Si cela ne pose aucun problème en conditions "normales", la moindre modification entrée dans le playground (ajout d'un caractère par exemple) déclenchera une erreur non-bloquante, ce qui entrave vraiment l'utilisation du playground, étant obligé d'entrer un caractère et de fermer l'erreur en boucle. De plus, l'historique est indisponible, ce qui place donc le playground dans la catégorie "Fonctionnement impossible".
 
 \paragraph{L'inspecteur :}
 La fonction de l'inspecteur est d'afficher la composition d'un objet pour permettre de connaître la valeur de chaque attribut à un moment donné ce qui est très utile quand on cherche à corriger une erreur.
 
 Mon test consistait à vérifier si l'inspecteur peut afficher le contenu d'un objet lambda, par exemple un nombre entier. Si l'inspection ne pose aucun problème en conditions "normales", rien ne s'affiche dans la fenêtre quand on est en lecture seule, déclenchant une erreur au passage. Je l'ai donc classé dans la catégorie "Fonctionnement impossible".
+
+\paragraph{Recherche dans le système (Spotter/senders/implementors) :}
+	Le Spotter est un outil de recherche rapide qui affiche tous les résultats (classes, méthodes, paquets, références, ...) correspondant au texte donné, et permettant d'ouvrir le navigateur pour en visualiser le code.
+	Pour mieux connaître le fonctionnement d'un algorithme, Pharo permet d'afficher les classes implémentant (implementors) ou appelant (senders) une méthode.
+	Pour tester ces fonctionnalités, j'ai cherché une classe avec le Spotter, puis cherché les implémenteurs et les senders d'une méthode, et elles fonctionnent parfaitement bien, que ce soit en conditions "normales" ou en lecture seule, ce qui les classent dans la catégorie "Fonctionnement normal"
+
+\paragraph{Gestion d'erreurs (Debugger) :}
+Le debugger Pharo est très performant, car il permet à un développeur de coder au travers de ce dernier : en effet, il suffit d'écrire le message que l'on veut implémenter, l'exécuter, ce qui ouvre le debugger avec une option permettant le cas échéant la création de la méthode/classe manquante, avant de relancer l'exécution là où elle s'était arrêtée. De plus, il affiche la trace des appels et permet de connaître à chacun d'entre eux le contenu de la mémoire pour donner tous les éléments nécessaires à la détection d'une erreur.
+Pour tester le debugger, j'ai volontairement déclenché une exception (que je teste au passage de ce fait) pour vérifier si le debugger s'affiche avec la trace, ce qui est le cas quelques soient les conditions. Je le classe donc dans la catégorie "Fonctionnement normal".
+
+\paragraph{Lecture et écriture de fichier :}
+Probablement un des points les plus importants de cette série de tests, la lecture et l'écriture de fichier est un des mécanismes les plus importants. Pour les tester, j'ai tenté de lire et d'écrire un fichier dans un répertoire en lecture seule et dans un répertoire inscriptible. 
 
 \input{./tex/questionnaire.tex}
 
