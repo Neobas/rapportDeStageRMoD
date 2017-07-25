@@ -1,7 +1,7 @@
 \subsubsection{Enquête auprès de la communauté}
-Avant de commencer à corriger les problèmes identifiés, j'ai fait une enquête (en anglais) auprès de la communauté de Pharo, intitulée "How Pharo should act in a read-only environment ?" (Comment Pharo devrait se comporter dans un environnement en lecture seule ?), pour avoir leur avis sur le comportement que Pharo devrait adopter au terme des réparations. Pour chaque question, plusieurs réponses étaient proposées, tout en laissant aux sondés la possibilité de donner une réponse différente si les propositions ne leurs convenaient pas. Ci-dessous sont listées les questions avec la répartition des réponses et une analyse de celles-ci.
+Avant de commencer à corriger les problèmes identifiés, j'ai fait une enquête (en anglais) auprès de la communauté de Pharo, intitulée "How Pharo should act in a read-only environment ?" (Comment Pharo devrait se comporter dans un environnement en lecture seule ?), pour avoir leur avis sur le comportement que Pharo devrait adopter au terme des réparations. J'ai récolté 25 réponses à cette enquête. Pour chaque question, plusieurs réponses étaient proposées, tout en laissant aux sondés la possibilité de donner une réponse différente si les propositions ne leurs convenaient pas. Ci-dessous sont listées les questions avec la répartition des réponses et une analyse de celles-ci.
 
-\paragraph{Est-ce que les tests qui écrivent dans un fichier devraient être lancés ?}
+\paragraph{1/ Est-ce que les tests qui écrivent dans un fichier devraient être lancés ?}
 \subparagraph{Réponses balisées :}
 \begin{itemize}
 	\item 24\% des sondés se moquent de savoir si les tests sont lancés ou non, car ces derniers n'ont pas été écrit dans le but d'être lancé en lecture seule.
@@ -25,7 +25,7 @@ Avant de commencer à corriger les problèmes identifiés, j'ai fait une enquêt
 \subparagraph{Analyse :}
 L'idée générale est que les tests devraient pouvoir être lancés, mais qu'ils devraient soit échouer, soit être ignorés. En soit la première option est déjà implémentée, car les tests échouent inévitablement si l'écriture échoue. La catégorisation est une idée intéressante, mais qui demande un travail plus approfondi pour trouver un système qui soit simple d'utilisation tout en assurant que le système ne sera pas trop impacté.
 
-\paragraph{Devrait-il être possible de créer des classes et/ou des méthodes ?}
+\paragraph{2/ Devrait-il être possible de créer des classes et/ou des méthodes ?}
 \subparagraph{Réponses balisées :}
 \begin{itemize}
 	\item 60\% des sondés souhaitent être capable d'écrire du code sans être confronté à une erreur.
@@ -45,7 +45,7 @@ L'idée générale est que les tests devraient pouvoir être lancés, mais qu'il
 \subparagraph{Analyse :}
 La majorité des sondés désire pouvoir coder sans problème, tandis qu'une partie un peu plus petite est prête à abandonner la sauvegarde pour pouvoir écrire du code, supposant que lancer Pharo en lecture seule implique de ne pouvoir qu'exécuter du code.
 
-\paragraph{Devrait-il être possible de sauvegarder les changements dans Monticello ?}
+\paragraph{3/ Devrait-il être possible de sauvegarder les changements dans Monticello ?}
 \subparagraph{Réponses balisées :}
 \begin{itemize}
 	\item 40\% des sondés souhaitent que Monticello ignore son package-cache posant problème pour pouvoir le faire fonctionner .
@@ -65,7 +65,7 @@ La majorité des sondés désire pouvoir coder sans problème, tandis qu'une par
 \subparagraph{Analyse :}
 La majorité des sondés souhaitent que Monticello soit fonctionnel, mais ne sont pas tous d'accord sur les modifications à apporter au package-cache, qui est à l'origine de la défaillance. Certains suggèrent que le cache soit purement et simplement ignoré, d'autres que le cache en question soit écrit dans une zone inscriptible.
 
-\paragraph{Devrait-il être possible d'utiliser l'inspecteur ?}
+\paragraph{4/ Devrait-il être possible d'utiliser l'inspecteur ?}
 \subparagraph{Réponses balisées :}
 \begin{itemize}
 	\item 80\% des sondés pensent que oui, car l'inspecteur est une pièce importante de l'IDE.
@@ -81,3 +81,58 @@ La majorité des sondés souhaitent que Monticello soit fonctionnel, mais ne son
 
 \subparagraph{Analyse :}
 Les résultats pour cette question sont très clair : l'inspecteur doit pouvoir fonctionner en lecture seule de part sa grande utilité dans le développement.
+
+\paragraph{5/ Est-ce que le playground devrait avoir un historique disponible ?}
+\subparagraph{Réponses balisées :}
+\begin{itemize}
+	\item 44\% des sondés pensent que oui, il en faudrait un qui soit sauvegardé dans la mémoire du système.
+	\item 28\% des sondés pensent que le playground ne devrait pas en avoir en lecture seule.
+	\item 12\% des sondés ne se prononcent pas.
+	\item 8\% des sondés pensent qu'il faut un historique écrit dans un répertoire inscriptible.
+\end{itemize}
+
+\subparagraph{Réponses libres :}
+\begin{itemize}
+	\item Il devrait y en avoir un stocké en mémoire, avec la possibilité de définir un fichier pour sauvegarder en utilisant la ligne de commande.
+\end{itemize}
+
+\subparagraph{Analyse :}
+La majorité des sondés souhaite que le playground puisse avoir un historique quand le système est read-only, avec une préférence pour la sauvegarde en mémoire.
+
+\paragraph{6/ Que devrait-il se passer pour le log du système par défaut ?}
+\subparagraph{Réponses balisées :}
+\begin{itemize}
+	\item 68\% des sondés souhaitent que le log soit écrit dans un emplacement par défaut défini par le système d'exploitation (par exemple /var/log pour Linux).
+	\item 12\% des sondés souhaitent que le log soit ignoré.
+	\item 8\% des sondés souhaitent que le log soit imprimé dans le terminal.
+	\item 4\% des sondés ne se prononcent pas.
+\end{itemize}
+
+\subparagraph{Réponses libres :}
+\begin{itemize}
+	\item Le log devrait être écrit en mémoire, mais avec la possibilité d'utiliser la ligne de commande pour spécifier un fichier destiné au log.
+	\item Le log devrait être envoyé à un serveur distant.
+\end{itemize}
+
+\subparagraph{Analyse :}
+La majorité des sondés désirent avoir du log écrit dans un répertoire du système d'exploitation dédié à cette fonction.
+
+\paragraph{}
+La question suivante n'a été posée que si le sondé répondait positivement ou librement à la question 2. 21 personnes sur les 25 ont répondues à cette question
+
+\paragraph{7/ Où devrait être stocké le code par défaut?}
+\subparagraph{Réponses balisées :}
+\begin{itemize}
+	\item 66,7\% des sondés souhaitent que le code soit stocké en mémoire, et qu'il soit donc oublié à la fermeture de Pharo.
+	\item 9,5\% des sondés souhaitent que le code soit écrit dans un autre fichier à part.
+	\item 9,5\% des sondés souhaitent que le code soit stocké dans une base de données dans un emplacement connu.
+	\item 4,8\% des sondés pensent qu'il ne faudrait pas développé dans un système en lecture seule.
+\end{itemize}
+
+\subparagraph{Réponses libres :}
+\begin{itemize}
+	\item Pourquoi le code devrait-il être écrit dans un emplacement inscriptible ? On ne sauvegarde rien quand on est en lecture seule.
+\end{itemize}
+
+\subparagraph{Analyse :}
+La majorité des sondés souhaitent que le code soit simplement stocké en mémoire. De mon point de vue, cet possibilité permettrait de corriger un bug sans être obligé de réinstaller Pharo après avoir fait la correction dans un autre endroit (que ce soit une autre machine ou un autre répertoire).
