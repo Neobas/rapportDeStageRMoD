@@ -80,6 +80,10 @@ Le playground est comme son nom l'indique un bac à sable où l'on exécute du c
 Mon test visait à tester ce système d'historique en écrivant quelque chose dans le playground avant de le fermer et de tenter dans un autre de récupérer le code écrit. Si cela ne pose aucun problème en conditions "normales", la moindre modification entrée dans le playground (ajout d'un caractère par exemple) déclenchera une erreur non-bloquante, ce qui entrave vraiment l'utilisation du playground, étant obligé d'entrer un caractère et de fermer l'erreur en boucle. De plus, l'historique est indisponible, ce qui place donc le playground dans la catégorie "Fonctionnement impossible".
 
 \paragraph{L'inspecteur :}
+\begin{figure}[h]
+	\includegraphics[width=\linewidth]{./img/inspector.png}
+	\caption[monticello]{Un inspecteur sur l'unique instance de SystemLog}
+\end{figure}
 La fonction de l'inspecteur est d'afficher la composition d'un objet pour permettre de connaître la valeur de chaque attribut à un moment donné ce qui est très utile quand on cherche à corriger une erreur.
 
 Mon test consistait à vérifier si l'inspecteur peut afficher le contenu d'un objet lambda, par exemple un nombre entier. Si l'inspection ne pose aucun problème en conditions "normales", rien ne s'affiche dans la fenêtre quand on est en lecture seule, déclenchant une erreur au passage. Je l'ai donc classé dans la catégorie "Fonctionnement impossible".

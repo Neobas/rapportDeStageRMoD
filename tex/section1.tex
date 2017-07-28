@@ -21,18 +21,38 @@
 	\end{itemize}
 
 	\paragraph{Syntaxe :}
-	La figure suivante représente la syntaxe complète de Pharo :
+	La figure 1 représente la syntaxe complète de Pharo sous la forme d'une définition de méthode, que je vais expliquer en faisant le parallèle avec un autre langage orienté objet : Java.
 	
 	\begin{figure}
 		\includegraphics[width=12cm]{./img/pharo_syntax.png}
 		\caption[pharosyntax]{La syntaxe complète de Pharo}
 	\end{figure}
-
+	
+	\subparagraph{déclaration :}
+	\verb$exampleWithNumber: x$	représente la déclaration de la méthode \verb$exampleWithNumber$ avec un paramètre nommé \verb$x$. L'équivalent Java est:
+	\begin{verbatim}
+		public boolean exampleWithNumber (int x)
+	\end{verbatim}
+	
+	\subparagraph{Les commentaires :}
+	Contrairement à Java qui utilise deux syntaxes pour gérer les commentaires sur une ou plusieurs lignes, Pharo n'en utilise qu'une :
+	\begin{verbatim}
+		// Ceci est un commentaire en Java
+		
+		"Ceci est un commentaire en Pharo"
+		
+		\*Ceci est un commentaire
+		sur plusieurs lignes en Java*/
+		
+		"Ceci est un commentaire
+		sur plusieurs lignes en Pharo"
+	\end{verbatim}
+	
 	\paragraph{Live Programming :}
 	L'un des principaux intérêts de Pharo est qu'il n'est pas nécessaire de recompiler tout le code en cas de modification. Il est par exemple possible de coder au sein du debugger : On écrit un test, on le lance, une erreur apparait (le message envoyé n'existe pas), on peut alors ouvrir le debugger, implémenter la méthode correspondante, compiler à la volée et reprendre le cours de l'exécution comme si rien ne s'était produit.
 	
 	\paragraph{}
-	Pharo est actuellement disponible dans sa version 6.0, sortie le 6 juin 2017.
+	Pharo est actuellement disponible en version 6.1, sortie le 24 juillet 2017.
 
 	\subsubsection{git}
 	Git est un logiciel libre de gestion de versions décentralisé créé par Linus Torvalds, et distribué sous la licence publique générale GNU (GPL-2.0). Il est particulièrement utile pour gérer les modifications apportées à un projet grâce à un système de commits et de branches, surtout si il est couplé à un service en ligne capable de le gérer (par exemple github, pour ne citer que le plus connu).
